@@ -112,7 +112,7 @@
                     (critical   . "#de0051")
                     (popout	    . "#008217")
                     (salient    . "#0071af")
-                    (faded      . "#3e3e3e3")
+                    (faded      . "#3e3e3e")
                     (subtle     . "#e2e2e2")))))
 
 (defmacro esprit-themes--variant-with-colors (variant &rest body)
