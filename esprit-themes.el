@@ -1,10 +1,10 @@
-;;; reasonable-themes.el --- A set of sensible color themes -*- lexical-binding: t; -*-
+;;; esprit-themes.el --- A set of esprit color themes -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2024 Luke Inglis
 
 ;; Author: Luke Inglis <ld.inglis@gmail.com>
 ;; Maintainer: Luke Inglis <ld.inglis@gmail.com>>
-;; URL: https://github.com/ludamillion/sensible-themes
+;; URL: https://github.com/ludamillion/esprit-themes
 ;; Created: 19th July 2024
 ;; Version: 1.0.0
 ;; Keywords: faces
@@ -79,7 +79,7 @@
 ;; Another influence, and the source of the color palette from which
 ;; I drew the colors for these themes, is Matthew Howell who does
 ;; business as Reasonable Company.  His naming was my inspiration for
-;; the 'Sensible' moniker for these themes.
+;; the 'Esprit' moniker for these themes.
 ;;
 ;; Of primary interest is his Reasonable Colors project.  Reasonable
 ;; Colors is a carefully considered palette of colors with simple
@@ -99,18 +99,25 @@
 
 ;;; Code:
 
-(defconst sensible-colors
-  '((azure . ((background . "#222222")
-							(foreground . "#f6f6f6")
-							(critical   . "#FF426C")
-							(popout	    . "#00A21F")
-							(salient    . "#008FDB")
-							(faded      . "#3e3e3e")
-							(subtle  	  . "#6f6f6f")))))
+(defconst esprit-colors
+  '((azure-dark . ((background . "#222222")
+                   (foreground . "#f6f6f6")
+                   (critical   . "#FF426C")
+                   (popout	   . "#00A21F")
+                   (salient    . "#008FDB")
+                   (faded      . "#e2e2e2")
+                   (subtle     . "#3e3e3e")))
+    (azure-light . ((background . "#f6f6f6")
+                    (foreground . "#222222")
+                    (critical   . "#de0051")
+                    (popout	    . "#008217")
+                    (salient    . "#0071af")
+                    (faded      . "#3e3e3e3")
+                    (subtle     . "#e2e2e2")))))
 
-(defmacro sensible-themes--variant-with-colors (variant &rest body)
+(defmacro esprit-themes--variant-with-colors (variant &rest body)
   "Execute BODY in a scope where the different colors for given VARIANT is bound."
-  `(let* ((colors (or (cdr (assoc ,variant sensible-colors))
+  `(let* ((colors (or (cdr (assoc ,variant esprit-colors))
 											(error "No such theme variant")))
 					(background (cdr (assoc 'background colors)))
 					(foreground (cdr (assoc 'foreground colors)))
@@ -121,7 +128,7 @@
 					(subtle     (cdr (assoc 'subtle colors))))
      ,@body))
 
-(defmacro sensible-themes--faces-spec ()
+(defmacro esprit-themes--faces-spec ()
   "Provide the faces specification."
   (quote
    (mapcar
@@ -213,21 +220,21 @@
 
       ))))
 
-(defun sensible-themes--variant-name (variant)
+(defun esprit-themes--variant-name (variant)
   "Create symbol for color theme variant VARIANT."
-  (intern (format "sensible-%s" (symbol-name variant))))
+  (intern (format "esprit-%s" (symbol-name variant))))
 
-(defmacro sensible-themes--define-theme (variant)
-  "Define a theme for the sensible variant VARIANT."
-  (let ((name (sensible-themes--variant-name variant))
-        (doc (format "sensible theme (%s version)" variant)))
+(defmacro esprit-themes--define-theme (variant)
+  "Define a theme for the esprit variant VARIANT."
+  (let ((name (esprit-themes--variant-name variant))
+        (doc (format "esprit theme (%s version)" variant)))
     `(progn
        (deftheme ,name ,doc)
        (put ',name 'theme-immediate t)
-       (sensible-themes--variant-with-colors
+       (esprit-themes--variant-with-colors
         ',variant
         (apply 'custom-theme-set-faces ',name
-               (sensible-themes--faces-spec)))
+               (esprit-themes--faces-spec)))
        (provide-theme ',name))))
 
 ;;;###autoload
@@ -235,6 +242,6 @@
   (add-to-list 'custom-theme-load-path
 							 (file-name-as-directory (file-name-directory load-file-name))))
 
-(provide 'sensible-themes)
+(provide 'esprit-themes)
 
-;;; sensible-themes.el ends here
+;;; esprit-themes.el ends here
