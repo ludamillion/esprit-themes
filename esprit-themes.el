@@ -78,8 +78,7 @@
 ;;
 ;; Another influence, and the source of the color palette from which
 ;; I drew the colors for these themes, is Matthew Howell who does
-;; business as Reasonable Company.  His naming was my inspiration for
-;; the 'Esprit' moniker for these themes.
+;; business as Reasonable Company.  
 ;;
 ;; Of primary interest is his Reasonable Colors project.  Reasonable
 ;; Colors is a carefully considered palette of colors with simple
@@ -103,29 +102,58 @@
   '((azure-dark . ((background . "#222222")
                    (foreground . "#f6f6f6")
                    (critical   . "#FF426C")
-                   (popout	   . "#00A21F")
+                   (popout     . "#00A21F")
                    (salient    . "#008FDB")
                    (faded      . "#e2e2e2")
                    (subtle     . "#3e3e3e")))
     (azure-light . ((background . "#f6f6f6")
                     (foreground . "#222222")
                     (critical   . "#de0051")
-                    (popout	    . "#008217")
+                    (popout     . "#008217")
                     (salient    . "#0071af")
                     (faded      . "#3e3e3e")
-                    (subtle     . "#e2e2e2")))))
+                    (subtle     . "#e2e2e2")))
+    (blue-dark . ((background . "#222222")
+                  (foreground . "#f6f6f6")
+                  (critical   . "#ff4647")
+                  (popout     . "#00a05a")
+                  (salient    . "#0089fc")
+                  (faded      . "#e2e2e2")
+                  (subtle     . "#3e3e3e")))
+    (blue-light . ((background . "#f6f6f6")
+                   (foreground . "#222222")
+                   (critical   . "#e0002b")
+                   (popout     . "#008147")
+                   (salient    . "#006dca")
+                   (faded      . "#3e3e3e")
+                   (subtle     . "#e2e2e2")))
+    (cerulean-dark . ((background . "#222222")
+                  (foreground . "#f6f6f6")
+                  (critical   . "#ff3b8d")
+                  (popout     . "#5c9b00")
+                  (salient    . "#0092c5")
+                  (faded      . "#e2e2e2")
+                  (subtle     . "#3e3e3e")))
+    (cerulean-light . ((background . "#f6f6f6")
+                   (foreground . "#222222")
+                   (critical   . "#db0072")
+                   (popout     . "#497c00")
+                   (salient    . "#00749d")
+                   (faded      . "#3e3e3e")
+                   (subtle     . "#e2e2e2")))
+    ))
 
 (defmacro esprit-themes--variant-with-colors (variant &rest body)
   "Execute BODY in a scope where the different colors for given VARIANT is bound."
   `(let* ((colors (or (cdr (assoc ,variant esprit-colors))
-											(error "No such theme variant")))
-					(background (cdr (assoc 'background colors)))
-					(foreground (cdr (assoc 'foreground colors)))
-					(critical   (cdr (assoc 'critical colors)))
-					(popout     (cdr (assoc 'popout colors)))
-					(salient    (cdr (assoc 'salient colors)))
-					(faded      (cdr (assoc 'faded colors)))
-					(subtle     (cdr (assoc 'subtle colors))))
+		      (error "No such theme variant")))
+	  (background (cdr (assoc 'background colors)))
+	  (foreground (cdr (assoc 'foreground colors)))
+	  (critical   (cdr (assoc 'critical colors)))
+	  (popout     (cdr (assoc 'popout colors)))
+	  (salient    (cdr (assoc 'salient colors)))
+	  (faded      (cdr (assoc 'faded colors)))
+	  (subtle     (cdr (assoc 'subtle colors))))
      ,@body))
 
 (defmacro esprit-themes--faces-spec ()
@@ -142,21 +170,21 @@
       (show-paren-match (:background ,background :foreground ,popout :bold t))
       (show-paren-mismatch (:background ,background :foreground ,critical :bold t))
       (minibuffer-prompt (:weight bold :foreground ,foreground))
-      (isearch (:background ,faded :foreground ,foreground :bold t))
+      (isearch (:foreground ,popout :bold t))
       (lazy-highlight (:background ,subtle :foreground ,foreground))
       (link (:underline t))
 
       ;; mode line
       (mode-line (:box (:line-width -1 :color ,faded)
-											 :background ,subtle :foreground ,foreground))
+		       :background ,subtle :foreground ,foreground))
 
       (mode-line-inactive (:box (:line-width -1 :color ,faded)
-																:background ,background :foreground ,faded))
+				:background ,background :foreground ,faded))
 
       ;; font lock
-      (font-lock-keyword-face (:bold t))
-      (font-lock-function-name-face (:bold t))
-      (font-lock-variable-name-face (:foreground ,foreground))
+      (font-lock-keyword-face (:foreground ,salient :bold t))
+      (font-lock-function-name-face (:italic t))
+      (font-lock-function-call-face (:foreground ,salient :italic t))
       (font-lock-warning-face (:foreground ,foreground :underline (:color ,critical :style wave)))
       (font-lock-builtin-face (:bold t))
       (font-lock-variable-name-face (:foreground ,foreground :italic t))
@@ -240,7 +268,7 @@
 ;;;###autoload
 (when (and (boundp 'custom-theme-load-path) load-file-name)
   (add-to-list 'custom-theme-load-path
-							 (file-name-as-directory (file-name-directory load-file-name))))
+	       (file-name-as-directory (file-name-directory load-file-name))))
 
 (provide 'esprit-themes)
 
