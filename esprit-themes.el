@@ -211,17 +211,6 @@
       (eshell-ls-special (:inherit eshell-ls-unreadable))
       (eshell-ls-symlink (:inherit eshell-ls-unreadable))
 
-      ;; company mode
-      (company-tooltip (:background ,subtle :foreground ,foreground))
-      (company-tooltip-selection (:background ,subtle :foreground ,foreground))
-      ;;(company-tooltip-search (:background "#ff0000" :foreground "#00ff00"))
-      (company-tooltip-common (:bold t))
-      (company-tooltip-common-selection (:bold t))
-      (company-scrollbar-bg (:background ,subtle))
-      (company-scrollbar-fg (:background ,faded))
-      (company-tooltip-annotation-selection (:background ,subtle :foreground ,foreground :italic t))
-      (company-tooltip-annotation (:background ,subtle :foreground ,faded :italic t))
-
       ;; git gutter
       (git-gutter:modified (:background ,subtle :foreground ,subtle))
       (git-gutter:added (:background ,popout :foreground ,popout))
@@ -245,6 +234,8 @@
 
       ;; org mode
       (org-table (:foreground ,faded))
+
+      (jinx-misspelled (:underline (:color ,critical :style wave)))
 
       ))))
 
