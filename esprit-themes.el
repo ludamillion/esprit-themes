@@ -183,11 +183,11 @@
 
       ;; font lock
       (font-lock-keyword-face (:foreground ,salient :bold t))
-      (font-lock-function-name-face (:italic t))
+      (font-lock-function-name-face (:bold t))
       (font-lock-function-call-face (:foreground ,salient :italic t))
       (font-lock-warning-face (:foreground ,foreground :underline (:color ,critical :style wave)))
       (font-lock-builtin-face (:bold t))
-      (font-lock-variable-name-face (:foreground ,foreground :italic t))
+      (font-lock-variable-name-face (:foreground ,popout :italic t))
       (font-lock-constant-face (:bold t :italic t))
       (font-lock-type-face (:italic t))
       (font-lock-preprocessor-face (:italic t))
