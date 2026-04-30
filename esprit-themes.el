@@ -234,6 +234,7 @@
 
       ;; org mode
       (org-table (:foreground ,faded))
+      (org-block (:background ,subtle))
 
       (jinx-misspelled (:underline (:color ,critical :style wave)))
 
